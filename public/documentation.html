@@ -1,1 +1,101 @@
-REST API FOR MOVIES
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+  <title>Movies Documentation</title>
+</head>
+<body>
+  <h1>MOVIES REST API DOCUMENTATION</h1>
+  <div class="endpoints">
+    <!-- MOVIES TABLE -->
+    <table class="movies">
+      <h2>MOVIES ENDPOINTS</h2>
+      <tr>
+        <th>Business Logic</th>
+        <th>Url</th>
+        <th>HTTP Method</th>
+        <th>Request body data</th>
+        <th>Response body data</th>
+      </tr>
+      <tr>
+        <td>Get all movies to the user</td>
+        <td>\movies</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A JSON object data holding all movies</td>
+      </tr>
+      <tr>
+        <td>Get a movie by title to the user</td>
+        <td>\movies\[TITLE]</td>
+        <td>GET</td>
+        <td>A request parameter of the movie title</td>
+        <td>A JSON data object holding the movies for the request title</td>
+      </tr>
+      <tr>
+        <td>Get a genre by title or name of movies</td>
+        <td>\movies\genre\[NAME/TITLE]\</td>
+        <td>GET</td>
+        <td>A request parameter of the movie title or name</td>
+        <td>A JSON data holding the genre for the request title</td>
+      </tr>
+      <tr>
+        <td>Get a movie director by title or name of movies</td>
+        <td>\movies\director\[NAME/TITLE]\</td>
+        <td>GET</td>
+        <td>A request parameter of the movie director name</td>
+        <td>A JSON data object of director
+          <code>bio, birth year, death year</code> </td>
+      </tr>
+    </table>
+
+    <!-- USERS TABLE -->
+    <table class="users">
+      <h2>USERS ENDPOINTS</h2>
+      <tr>
+        <th>Business Logic</th>
+        <th>Url</th>
+        <th>HTTP Method</th>
+        <th>Request body data</th>
+        <th>Response body data</th>
+      </tr>
+      <tr>
+        <td>Register user</td>
+        <td>\users</td>
+        <td>POST</td>
+        <td>A JSON object data holding user details</td>
+        <td>A JSON object data containing user data and ID</td>
+      </tr>
+      <tr>
+        <td>Update user data</td>
+        <td>\users\[USERID]</td>
+        <td>PUT</td>
+        <td>Data containing the new <code>username</code></td>
+        <td>A Text message indicating the user is successfully updated</td>
+      </tr>
+      <tr>
+        <td>user adding a movie</td>
+        <td>\users\[USER_ID]\favourites\</td>
+        <td>POST</td>
+        <td>A JSON objects containing the favourite movies and the userId</td>
+        <td>A JSON Object data containing the favourite movies of the user </td>
+      </tr>
+      <tr>
+        <td>Delete movies from users favourite</td>
+        <td>\users\[USER_ID]\favourites\[FAVOURITE_ID]</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>A Text message indicating the favourite movies has been deleted</td>
+      </tr>
+      <tr>
+        <td>Delete users</td>
+        <td>\users\[USER_ID]</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>A Text message indicating the user has been deleted</td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>
