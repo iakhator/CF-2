@@ -21,28 +21,28 @@
       </tr>
       <tr>
         <td>Get all movies to the user</td>
-        <td>\movies</td>
+        <td>/movies</td>
         <td>GET</td>
         <td>None</td>
         <td>A JSON object data holding all movies</td>
       </tr>
       <tr>
         <td>Get a movie by title to the user</td>
-        <td>\movies\[TITLE]</td>
+        <td>/movies/[TITLE]</td>
         <td>GET</td>
         <td>A request parameter of the movie title</td>
         <td>A JSON data object holding the movies for the request title</td>
       </tr>
       <tr>
         <td>Get a genre by title or name of movies</td>
-        <td>\movies\genre\[NAME/TITLE]\</td>
+        <td>/movies/genre/[NAME/TITLE]</td>
         <td>GET</td>
         <td>A request parameter of the movie title or name</td>
         <td>A JSON data holding the genre for the request title</td>
       </tr>
       <tr>
         <td>Get a movie director by title or name of movies</td>
-        <td>\movies\director\[NAME/TITLE]\</td>
+        <td>/movies/director/[NAME/TITLE]</td>
         <td>GET</td>
         <td>A request parameter of the movie director name</td>
         <td>A JSON data object of director
@@ -62,35 +62,35 @@
       </tr>
       <tr>
         <td>Register user</td>
-        <td>\users</td>
+        <td>/users</td>
         <td>POST</td>
         <td>A JSON object data holding user details</td>
         <td>A JSON object data containing user data and ID</td>
       </tr>
       <tr>
         <td>Update user data</td>
-        <td>\users\[USERID]</td>
+        <td>/users/[USERID]</td>
         <td>PUT</td>
         <td>Data containing the new <code>username</code></td>
         <td>A Text message indicating the user is successfully updated</td>
       </tr>
       <tr>
-        <td>user adding a movie</td>
-        <td>\users\[USER_ID]\favourites\</td>
+        <td>user adding favourite movie</td>
+        <td>/users/[USER_ID]\favourites\</td>
         <td>POST</td>
         <td>A JSON objects containing the favourite movies and the userId</td>
         <td>A JSON Object data containing the favourite movies of the user </td>
       </tr>
       <tr>
         <td>Delete movies from users favourite</td>
-        <td>\users\[USER_ID]\favourites\[FAVOURITE_ID]</td>
+        <td>/users/[USER_ID]/favourites/[FAVOURITE_ID]</td>
         <td>DELETE</td>
         <td>None</td>
         <td>A Text message indicating the favourite movies has been deleted</td>
       </tr>
       <tr>
         <td>Delete users</td>
-        <td>\users\[USER_ID]</td>
+        <td>/users/[USER_ID]</td>
         <td>DELETE</td>
         <td>None</td>
         <td>A Text message indicating the user has been deleted</td>
