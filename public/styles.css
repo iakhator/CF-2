@@ -2,6 +2,7 @@ table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
+  font-size: 0.8rem;
 }
 
 td, th {
@@ -12,4 +13,32 @@ td, th {
 
 tr:nth-child(even) {
   background-color: #dddddd;
+}
+td.td-sm{
+  width: 5% ;
+} 
+
+td.td-md {
+  width: 15% ;
+} 
+
+td.td-lg {
+  width: 25% ;
+} 
+
+code {
+  font-size:0.8em;
+  color: crimson;
+  padding: 2px;
+  
+}
+
+pre {
+  word-wrap: anywhere;
+  width: 0;
+}
+
+.endpoints {
+  width: 1000px;
+  margin: 0 auto;
 }

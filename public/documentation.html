@@ -13,40 +13,108 @@
     <table class="movies">
       <h2>MOVIES ENDPOINTS</h2>
       <tr>
-        <th>Business Logic</th>
-        <th>Url</th>
-        <th>HTTP Method</th>
-        <th>Request body data</th>
-        <th>Response body data</th>
+        <th class="tb-10">Business Logic</th>
+        <th class="tb-20">Url</th>
+        <th class="tb-25">HTTP Method</th>
+        <th class="tb-15">Request body data</th>
+        <th class="tb-5">Response body data</th>
       </tr>
       <tr>
-        <td>Get all movies to the user</td>
-        <td>/movies</td>
-        <td>GET</td>
-        <td>None</td>
-        <td>A JSON object data holding all movies</td>
+        <td class="td-sm">Get all movies to the user</td>
+        <td class="td-sm">/movies</td>
+        <td class="td-sm">GET</td>
+        <td class="td-sm">None</td>
+        <td class="td-md">
+          An Array of movie objects
+          <pre>
+            <code>
+              [{
+              "Genre": {
+              "Name": "Thriller",
+              "Description": "Thriller film, ."
+              },
+              "Director": {
+              "Name": "Jonathan Demme",
+              "Bio": "Robert Jonathan ",
+              "Birth": "1944",
+              "Death": "2017"
+              },
+              "Actors": [],
+              "_id": "5f53792b42cd3cb461a3434t",
+              "Title": "Silence of the Lambs",
+              "Description": "A young FBI",
+              "ImagePath": "silenceofthelam",
+              "Featured": true
+              }]
+            </code>
+          </pre>
+        </td>
       </tr>
       <tr>
         <td>Get a movie by title to the user</td>
         <td>/movies/[TITLE]</td>
         <td>GET</td>
         <td>A request parameter of the movie title</td>
-        <td>A JSON data object holding the movies for the request title</td>
+        <td>
+          A JSON data object holding the movies for the request title
+          <pre>
+            <code>
+              {
+              "Genre": {
+              "Name": "Fantasy",
+              "Description": "Fantasy is a genre ."
+              },
+              "Director": {
+              "Name": "Chris Sanders",
+              "Birth": 1962,
+              "Bio": "Christopher Michael."
+              },
+              "Actors": [
+              "Jay Baruchel",
+              ],
+              "_id": "5f5641c470737d7bf95c76",
+              "Title": "How to Train Your Dragon",
+              "Description": "A hapless young Viking .",
+              "ImagePath": ldl.jpg"
+              }
+            </code>
+          </pre>
+        </td>
       </tr>
       <tr>
         <td>Get a genre by title or name of movies</td>
         <td>/movies/genre/[NAME/TITLE]</td>
         <td>GET</td>
         <td>A request parameter of the movie title or name</td>
-        <td>A JSON data holding the genre for the request title</td>
+        <td>
+          A JSON data holding the genre for the request title
+          <pre>
+            <code>
+              {
+              "Name": "Action",
+              "Description": "Action film is a film genre."
+              }
+            </code>
+          </pre>
+        </td>
       </tr>
       <tr>
         <td>Get a movie director by title or name of movies</td>
         <td>/movies/director/[NAME/TITLE]</td>
         <td>GET</td>
         <td>A request parameter of the movie director name</td>
-        <td>A JSON data object of director
-          <code>bio, birth year, death year</code> </td>
+        <td class="data">
+          A JSON data object of director
+            <pre>
+            <code>
+              {
+              "Name": "Denis Villeneuve",
+              "Birth": 1967,
+              "Bio": "Denis Villeneuve OC CQ is.
+              }
+            </code>
+          </pre>
+        </td>
       </tr>
     </table>
 
@@ -65,35 +133,115 @@
         <td>/users</td>
         <td>POST</td>
         <td>A JSON object data holding user details</td>
-        <td>A JSON object data containing user data and ID</td>
+        <td>A JSON object data containing user data and ID
+          <pre><code>
+            {
+            "FavoriteMovies": [],
+            "_id": "5f564d2463f33c3803fb4773",
+            "Username": "Charity",
+            "Password": "password",
+            "Email": "charity@email.com",
+            "Birthday": "2000-09-01T23:00:00.000Z",
+            "__v": 0
+            }
+          </code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Get all users</td>
+        <td>/users</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A JSON object data containing all users
+          <pre>
+            <code>
+              [
+              {
+              "FavoriteMovies": [],
+              "_id": "5f562e626ad1d9daebb0128f",
+              "Username": "Jonathan",
+              "Password": "password",
+              "Email": "jonathan@email.com",
+              "Birthday": "2000-09-01T23:00:00.000Z",
+              "__v": 0
+              }
+              ]
+            </code>
+          </pre>
+        </td>
       </tr>
       <tr>
         <td>Update user data</td>
-        <td>/users/[USERID]</td>
+        <td>/users/[USERNAME]</td>
         <td>PUT</td>
         <td>Data containing the new <code>username</code></td>
-        <td>A Text message indicating the user is successfully updated</td>
+        <td>A json data of the updated user
+          <pre>
+            <code>
+              {
+              "FavoriteMovies": [],
+              "_id": "5f564d2463f33c3803fb4773",
+              "Username": "Charity1",
+              "Password": "password",
+              "Email": "charity@email.com",
+              "Birthday": "2000-09-01T23:00:00.000Z",
+              "__v": 0
+              }
+            </code>
+          </pre>
+        </td>
       </tr>
       <tr>
         <td>user adding favourite movie</td>
-        <td>/users/[USER_ID]\favourites\</td>
+        <td>/users/[USERNAME]/favourites/[MOVIEID]</td>
         <td>POST</td>
         <td>A JSON objects containing the favourite movies and the userId</td>
-        <td>A JSON Object data containing the favourite movies of the user </td>
+        <td>
+          <pre>
+            <code>
+              {
+              "FavoriteMovies": [
+              "5f53792b42cd3cb461a34342"
+              ],
+              "_id": "5f564d2463f33c3803fb4774",
+              "Username": "Charite",
+              "Password": "password",
+              "Email": "charity@email.com",
+              "Birthday": "2000-09-01T23:00:00.000Z",
+              "__v": 0
+              }
+            </code>
+          </pre>
+        </td>
       </tr>
       <tr>
-        <td>Delete movies from users favourite</td>
-        <td>/users/[USER_ID]/favourites/[FAVOURITE_ID]</td>
-        <td>DELETE</td>
-        <td>None</td>
-        <td>A Text message indicating the favourite movies has been deleted</td>
+        <td class="td-sm"> Delete movies from users favourite</td>
+        <td class="td-sm">/users/[USERNAME]/favourites/[MOVIEID]</td>
+        <td class="td-sm">DELETE</td>
+        <td class="td-sm">None</td>
+        <td class="td-md">
+          <pre>
+            <code>
+              {
+              "message": "Favourite movie of id 5 was deleted"
+              }
+            </code>
+          </pre>
+        </td>
       </tr>
       <tr>
         <td>Delete users</td>
-        <td>/users/[USER_ID]</td>
+        <td>/users/[USERNAME]</td>
         <td>DELETE</td>
         <td>None</td>
-        <td>A Text message indicating the user has been deleted</td>
+        <td>
+          <pre>
+            <code>
+              {
+              "message": "Mike was deleted"
+              }
+            </code>
+          </pre></td>
       </tr>
     </table>
   </div>
