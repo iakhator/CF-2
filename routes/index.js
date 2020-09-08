@@ -7,7 +7,14 @@ require('../passport');
 
 const router = express.Router()
 
+// login
 require('../auth')(router);
+
+// index route
+router.get('/', (req, res) => {
+  res.send('Welcome to my movies db. you can see the documentation by going to url/documentation.html')
+});
+
 // GET all movies
 router.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
