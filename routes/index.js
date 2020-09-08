@@ -1,49 +1,11 @@
 const express = require('express')
 const passport = require('passport');
+const { check, validationResult } = require('express-validator');
 const {Movies} = require('../models/movie')
 const {Users} = require('../models/user')
 require('../passport');
 
 const router = express.Router()
-const movies = [
-
-{
-  Title: "Iron Man",
-  Description: "After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.",
-  Genre: {
-    Name: "Action",
-    Description: "Action film is a film genre in which the protagonist or protagonists are thrust into a series of events that typically include violence, extended fighting, physical feats and frantic chases"
-  },
-  Director: { Name: "Jon Favreau", Birth: 1966, Bio: "Jonathan Favreau is an American actor, director, producer, and screenwriter. As an actor, Favreau has appeared in the films Rudy, Swingers, Very Bad Things" },
-  Actors: ["Robert Downey Jr.", "Terrence Howard", "Jeff Bridges", "Gwyneth Paltrow"],
-  ImagePath: "https://m.media-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_SX300.jpg"
-},
-
-{
-  Title: "How to Train Your Dragon",
-  Description: "A hapless young Viking who aspires to hunt dragons becomes the unlikely friend of a young dragon himself, and learns there may be more to the creatures than he assumed.",
-  Genre: {
-    Name: "Fantasy",
-    Description: "Fantasy is a genre of speculative fiction set in a fictional universe, often inspired by real world myth and folklore."
-  },
-  Director: { Name: "Chris Sanders", Birth: 1962, Bio: "Christopher Michael Sanders is an American animation director, film director, screenwriter, producer, illustrator and voice actor." },
-  Actors: ["Jay Baruchel", "Gerard Butler", "Craig Ferguson", "America Ferrera"],
-  ImagePath: "https://m.media-amazon.com/images/M/MV5BMjA5NDQyMjc2NF5BMl5BanBnXkFtZTcwMjg5ODcyMw@@._V1_SX300.jpg"
-},
-
-{
-  Title: "Tenet",
-  Description: "Armed with only one word, Tenet, and fighting for the survival of the entire world, a Protagonist journeys through a twilight world of international espionage on a mission that will unfold in something beyond real time.",
-  Genre: {
-    Name: "Sci-Fi",
-    Description: "Science fiction is a genre of speculative fiction that typically deals with imaginative and futuristic concepts such as advanced science and technology, space exploration, time travel, parallel universes, and extraterrestrial life."
-  },
-  Director: { Name: "Christopher Nolan", Birth: 1970, Bio: "Christopher Edward Nolan CBE is a British-American filmmaker known for making personal, distinctive films within the Hollywood mainstream" },
-  Actors: ["Elizabeth Debicki", "Robert Pattinson", "John David Washington", "Aaron Taylor-Johnson"],
-  ImagePath: "https://m.media-amazon.com/images/M/MV5BYzg0NGM2NjAtNmIxOC00MDJmLTg5ZmYtYzM0MTE4NWE2NzlhXkEyXkFqcGdeQXVyMTA4NjE0NjEy._V1_SX300.jpg"
-}
-]
-
 
 require('../auth')(router);
 // GET all movies
@@ -97,7 +59,19 @@ router.get('/movies/director/:name', passport.authenticate('jwt', { session: fal
 });
 
 //Register users
-router.post('/users', (req, res) => {
+router.post('/users', [
+    check('username', 'Username is required').isLength({min: 5}),
+    check('username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('password', 'Password is required').not().isEmpty(),
+    check('email', 'Email does not appear to be valid').isEmail()
+  ], (req, res) => {
+  // check the validation object for errors
+  let errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+  const hashedPassword = Users.hashPassword(req.body.password);
   Users.findOne({ Username: req.body.username })
     .then((user) => {
       if (user) {
@@ -106,7 +80,7 @@ router.post('/users', (req, res) => {
         return Users
           .create({
             Username: req.body.username,
-            Password: req.body.password,
+            Password: hashedPassword,
             Email: req.body.email,
             Birthday: req.body.birthday
         })
@@ -161,7 +135,7 @@ router.put('/users/:username', passport.authenticate('jwt', { session: false }),
 })
 
 //users add favourite movie
-router.post('/users/:username/favourites/:movieId', (req, res) => {
+router.post('/users/:username/favourites/:movieId', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.username }, {
      $push: { FavoriteMovies: req.params.movieId }
    },
@@ -177,7 +151,7 @@ router.post('/users/:username/favourites/:movieId', (req, res) => {
 })
 
 //delete favourite movies
-router.delete('/users/:username/favourites/:movieId', (req, res) => {
+router.delete('/users/:username/favourites/:movieId',passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.username }, {
      $pull: { FavoriteMovies: req.params.movieId }
    },
@@ -193,7 +167,7 @@ router.delete('/users/:username/favourites/:movieId', (req, res) => {
 })
 
 //delete user
-router.delete('/users/:username', (req, res) => {
+router.delete('/users/:username',passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndRemove({ Username: req.params.username })
     .then((user) => {
       if (!user) {
