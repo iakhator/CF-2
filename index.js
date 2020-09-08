@@ -22,7 +22,7 @@ app.use(morgan('common'));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://myFlixAdmin:australia@myflixdb.knven.mongodb.net/myFlixDB?retryWrites=true&w=majority');
 
 app.use('/', routes)
 
