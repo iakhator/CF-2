@@ -11,8 +11,11 @@
     "type": "git",
     "url": "git+https://github.com/iakhator/CF-2.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["heroku"],
+  "author": "iakhator",
+  "engines": {
+    "node": "10.x"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/iakhator/CF-2/issues"
