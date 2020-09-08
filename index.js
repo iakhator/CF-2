@@ -2,28 +2,20 @@ const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const cors = require('cors');
 const routes = require("./routes");
 const app = express();
 
+let allowedOrigins = ['http://localhost:8080'];
+
+app.use(cors());
 app.use(morgan('common'));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 app.use(express.static('public'));
 
-mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect( process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use('/', routes)
-
-    // Return a list of ALL movies to the user
-    // Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user
-    // Return data about a genre (description) by name/title (e.g., “Thriller”)
-    // Return data about a director (bio, birth year, death year) by name
-    // Allow new users to register
-    // Allow users to update their user info (username)
-    // Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)
-    // Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
-    // Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
-
-
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
@@ -32,7 +24,14 @@ app.use((err, req, res, next) => {
 
 
 // listen for requests
-app.listen(8080, () => console.log('Your app is listening on port 8080.'));
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0',() => {
+ console.log('Listening on Port ' + port);
+});
+
+
+
+
 
 // const users = [
 //   {
