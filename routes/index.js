@@ -1,9 +1,10 @@
 const express = require('express')
+const passport = require('passport');
 const {Movies} = require('../models/movie')
 const {Users} = require('../models/user')
+require('../passport');
 
 const router = express.Router()
-
 const movies = [
 
 {
@@ -42,8 +43,11 @@ const movies = [
   ImagePath: "https://m.media-amazon.com/images/M/MV5BYzg0NGM2NjAtNmIxOC00MDJmLTg5ZmYtYzM0MTE4NWE2NzlhXkEyXkFqcGdeQXVyMTA4NjE0NjEy._V1_SX300.jpg"
 }
 ]
+
+
+require('../auth')(router);
 // GET all movies
-router.get('/movies', (req, res) => {
+router.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
     .then((movies) => {
       res.status(200).json(movies);
@@ -55,7 +59,7 @@ router.get('/movies', (req, res) => {
 });
 
 // get single movies based on title
-router.get('/movies/:title', (req, res) => {
+router.get('/movies/:title', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.findOne({ Title: req.params.title })
     .then((movie) => {
       res.status(200).json(movie);
@@ -67,7 +71,7 @@ router.get('/movies/:title', (req, res) => {
 });
 
 //Get movie genre based on titles or name
-router.get('/movies/genre/:name', (req, res) => {
+router.get('/movies/genre/:name', passport.authenticate('jwt', { session: false }), (req, res) => {
    Movies.findOne({ 'Genre.Name': req.params.name })
     .then((movie) => {
       const genre = movie.Genre
@@ -80,7 +84,7 @@ router.get('/movies/genre/:name', (req, res) => {
 });
 
 //Get a movie director based on name
-router.get('/movies/director/:name', (req, res) => {
+router.get('/movies/director/:name', passport.authenticate('jwt', { session: false }), (req, res) => {
    Movies.findOne({ 'Director.Name': req.params.name })
     .then((movie) => {
       const director = movie.Director
@@ -116,7 +120,7 @@ router.post('/users', (req, res) => {
 });
 
 //get all users
-router.get('/users', (req, res) => {
+router.get('/users',passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.find()
     .then((users) => {
       res.status(200).json(users);
@@ -127,7 +131,7 @@ router.get('/users', (req, res) => {
     });
 });
 
-router.get('/users/:username', (req, res) => {
+router.get('/users/:username', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOne({ Username: req.params.username })
     .then((user) => {
       res.status(200).json(user);
@@ -139,7 +143,7 @@ router.get('/users/:username', (req, res) => {
 })
 
 //update users
-router.put('/users/:username', (req, res) => {
+router.put('/users/:username', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.username }, { $set:
     {
       Username: req.body.username,
