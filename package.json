@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
   "repository": {
@@ -13,9 +12,6 @@
   },
   "keywords": ["heroku"],
   "author": "iakhator",
-  "engines": {
-    "node": "10.x"
-  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/iakhator/CF-2/issues"
