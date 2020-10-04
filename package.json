@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iakhator/CF-2.git"
   },
-  "keywords": ["heroku"],
+  "keywords": [
+    "heroku"
+  ],
   "author": "iakhator",
   "license": "ISC",
   "bugs": {
@@ -27,6 +29,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.3",
     "morgan": "^1.10.0",
+    "nodemon": "^2.0.4",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0"
