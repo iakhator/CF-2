@@ -41,25 +41,25 @@
         "parameters": [{
           "name": "username",
           "in": "formData",
-          "description": "username of user",
+          "description": "Username",
           "required": true,
           "type": "string"
         }, {
           "name": "password",
           "in": "formData",
-          "description": "password of user",
+          "description": "Password",
           "required": false,
           "type": "string"
         }, {
           "name": "email",
           "in": "formData",
-          "description": "email of user",
+          "description": "Email",
           "required": false,
           "type": "string"
         }, {
          "name": "birthday",
          "in": "formData",
-         "description": "users birthday",
+         "description": "Birthday",
          "required": false,
          "type": "string"
        }],
@@ -178,7 +178,7 @@
         "parameters": [{
           "name": "username",
           "in": "path",
-          "description": "username of user",
+          "description": "Username",
           "required": true,
           "type": "string"
         }],
@@ -227,23 +227,23 @@
         "parameters": [{
           "name": "username",
           "in": "path",
-          "description": "username of user",
+          "description": "Username",
           "required": true,
           "type": "string"
         }, {
           "name": "password",
           "in": "formData",
-          "description": "password of user",
+          "description": "Password",
           "required": false,
           "type": "string"
         }, {
           "name": "email",
           "in": "formData",
-          "description": "email of user",
+          "description": "Email",
           "required": false,
           "type": "string"
         }, {
-         "name": "birthday",
+         "name": "Birthday",
          "in": "formData",
          "description": "users birthday",
          "required": false,
