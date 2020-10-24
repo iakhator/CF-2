@@ -136,7 +136,7 @@ router.put('/users/:username', passport.authenticate('jwt', { session: false }),
       console.error(err);
       res.status(500).send('Error: ' + err);
     } else {
-      res.json(updatedUser);
+      res.json('User successfully updated');
     }
   });
 })
