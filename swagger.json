@@ -74,6 +74,9 @@
           "Users"
         ],
         "summary": "Register users",
+        "consumes": [
+          "application/json"
+        ],
         "parameters": [{
           "name": "user",
           "in": "body",
