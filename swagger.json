@@ -29,10 +29,7 @@
         ],
         "summary": "Get all user",
         "security": {
-          "BearerAuth": {
-          "type": "http",
-          "scheme": "bearer"
-          }
+          "bearerAuth": []
         },
         "description": "Get All Users",
         "produces": [
@@ -77,34 +74,14 @@
           "Users"
         ],
         "summary": "Register users",
-        "consumes": [
-          "application/x-www-form-urlencoded"
-        ],
         "parameters": [{
-          "name": "username",
-          "in": "path",
-          "description": "Username",
-          "required": true,
-          "type": "string"
-        }, {
-          "name": "password",
-          "in": "formData",
-          "description": "Password",
-          "required": true,
-          "type": "string"
-        }, {
-          "name": "email",
-          "in": "formData",
-          "description": "Email",
-          "required": true,
-          "type": "string"
-        }, {
-         "name": "Birthday",
-         "in": "formData",
-         "description": "Birthday",
-         "required": true,
-         "type": "string"
-       }],
+          "name": "user",
+          "in": "body",
+          "description": "Create users",
+          "schema": {
+            "$ref": "#/definitions/Location"
+          }
+        }],
         "produces": [
           "application/json"
         ],
@@ -327,7 +304,6 @@
       } 
     }
   },
-  
   "definitions": {
     "Users": {
       "required": [
