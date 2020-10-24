@@ -79,7 +79,7 @@
           "in": "body",
           "description": "Create users",
           "schema": {
-            "$ref": "#/definitions/Location"
+            "$ref": "#/definitions/Users"
           }
         }],
         "produces": [
