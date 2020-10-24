@@ -90,19 +90,19 @@
           "name": "password",
           "in": "formData",
           "description": "Password",
-          "required": false,
+          "required": true,
           "type": "string"
         }, {
           "name": "email",
           "in": "formData",
           "description": "Email",
-          "required": false,
+          "required": true,
           "type": "string"
         }, {
          "name": "birthday",
          "in": "formData",
          "description": "Birthday",
-         "required": false,
+         "required": true,
          "type": "string"
        }],
         "produces": [
