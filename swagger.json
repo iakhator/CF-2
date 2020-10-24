@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "Location Population Management API",
-    "description": "Location Population API help you manage population in a given location",
+    "title": "MyFlix Movies APi",
+    "description": "This App help you manage movies",
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
@@ -43,26 +43,24 @@
             "description": "OK",
             "examples": {
               "application/json": {
-                "locations": {
-                  "results": [
-                    {
-                      "FavoriteMovies": [],
-                      "_id": "5f57aea490f89e00178a946c",
-                      "Username": "Chris",
-                      "Password": "$2b$10$.OWXDRdoEvyLfcdaHluw8.Zjy4JFFimWcNxOZzjeP7P.3jesZxXrm",
-                      "Email": "chris@email.com",
-                      "Birthday": "2000-09-02T00:00:00.000Z"
-                    },
-                    {
-                      "FavoriteMovies": [],
-                      "_id": "5f8c188a8a054e001775d01c",
-                      "Username": "James",
-                      "Password": "$2b$10$QfwBtPnINRoQqrIUaAxSsu4zxV2KDRBaxYaCQPbGOLtd1FgnXstcm",
-                      "Email": "james@gmail.com",
-                      "Birthday": "2020-10-01T00:00:00.000Z"
-                    }
-                  ]
-                }
+                "results": [
+                  {
+                    "FavoriteMovies": [],
+                    "_id": "5f57aea490f89e00178a946c",
+                    "Username": "Chris",
+                    "Password": "$2b$10$.OWXDRdoEvyLfcdaHluw8.Zjy4JFFimWcNxOZzjeP7P.3jesZxXrm",
+                    "Email": "chris@email.com",
+                    "Birthday": "2000-09-02T00:00:00.000Z"
+                  },
+                  {
+                    "FavoriteMovies": [],
+                    "_id": "5f8c188a8a054e001775d01c",
+                    "Username": "James",
+                    "Password": "$2b$10$QfwBtPnINRoQqrIUaAxSsu4zxV2KDRBaxYaCQPbGOLtd1FgnXstcm",
+                    "Email": "james@gmail.com",
+                    "Birthday": "2020-10-01T00:00:00.000Z"
+                  }
+                ]
               }
             },
             "schema": {
@@ -105,18 +103,18 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/Location"
+              "$ref": "#/definitions/Users"
             }
           },
           "400": {
             "description": "Bad request",
             "examples": {
               "application/json": {
-                "message": "Invalid population"
+                "message": "Invalid username"
               }
             },
             "schema": {
-              "$ref": "#/definitions/Location"
+              "$ref": "#/definitions/Users"
             }
           },
           "404": {
@@ -127,7 +125,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/Location"
+              "$ref": "#/definitions/Users"
             }
           }
         }
@@ -185,7 +183,7 @@
       },
       "put": {
         "tags": [
-          "Locations"
+          "Users"
         ],
         "security": {
           "BearerAuth": {
@@ -193,8 +191,8 @@
           "scheme": "bearer"
           }
         },
-        "summary": "Update location by id",
-        "description": "update location",
+        "summary": "Update users by username",
+        "description": "update user",
         "consumes": [
           "application/x-www-form-urlencoded"
         ],
@@ -300,7 +298,7 @@
     }
   },
   "definitions": {
-    "User": {
+    "Users": {
       "required": [
         "Username",
         "Password",
