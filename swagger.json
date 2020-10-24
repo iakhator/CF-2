@@ -35,6 +35,34 @@
           }
         },
         "description": "Get All Users",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [{
+          "name": "username",
+          "in": "formData",
+          "description": "username of user",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "password",
+          "in": "formData",
+          "description": "password of user",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "email",
+          "in": "formData",
+          "description": "email of user",
+          "required": false,
+          "type": "string"
+        }, {
+         "name": "birthday",
+         "in": "formData",
+         "description": "users birthday",
+         "required": false,
+         "type": "string"
+       }],
         "produces": [
           "application/json"
         ],
