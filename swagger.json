@@ -82,7 +82,7 @@
         ],
         "parameters": [{
           "name": "username",
-          "in": "formData",
+          "in": "path",
           "description": "Username",
           "required": true,
           "type": "string"
@@ -99,7 +99,7 @@
           "required": true,
           "type": "string"
         }, {
-         "name": "birthday",
+         "name": "Birthday",
          "in": "formData",
          "description": "Birthday",
          "required": true,
@@ -318,36 +318,42 @@
       }
     }
   },
+
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      } 
+    }
+  },
+  
   "definitions": {
     "Users": {
       "required": [
-        "Username",
-        "Password",
-        "Email",
-        "Birthday"
+        "username",
+        "password",
+        "email",
+        "birthday"
       ],
       "properties": {
-        "Username": {
+        "username": {
           "type": "string",
           "examples": "Kelvin"
         },
-        "Password": {
+        "password": {
           "type": "string",
           "example": "password"
         },
-        "id": {
-          "type": "string",
-          "examples": "5f562e626ad1d9daebb0128f"
-        },
-        "Email": {
+        "email": {
           "type": "string",
           "examples": "kelvin@gmail.com"
         },
-         "Birthday": {
+         "birthday": {
           "type": "string",
           "examples": "28th Jan"
         },
-        "FavouriteMovies": {
+        "favouriteMovies": {
         "type": "array",
         "examples": []
         }
