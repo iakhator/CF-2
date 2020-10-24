@@ -1,0 +1,338 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Location Population Management API",
+    "description": "Location Population API help you manage population in a given location",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "myflixx.herokuapp.com",
+  "basePath": "/",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get all user",
+        "security": {
+          "BearerAuth": {
+          "type": "http",
+          "scheme": "bearer"
+          }
+        },
+        "description": "Get All Users",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "locations": {
+                  "results": [
+                    {
+                      "FavoriteMovies": [],
+                      "_id": "5f57aea490f89e00178a946c",
+                      "Username": "Chris",
+                      "Password": "$2b$10$.OWXDRdoEvyLfcdaHluw8.Zjy4JFFimWcNxOZzjeP7P.3jesZxXrm",
+                      "Email": "chris@email.com",
+                      "Birthday": "2000-09-02T00:00:00.000Z"
+                    },
+                    {
+                      "FavoriteMovies": [],
+                      "_id": "5f8c188a8a054e001775d01c",
+                      "Username": "James",
+                      "Password": "$2b$10$QfwBtPnINRoQqrIUaAxSsu4zxV2KDRBaxYaCQPbGOLtd1FgnXstcm",
+                      "Email": "james@gmail.com",
+                      "Birthday": "2020-10-01T00:00:00.000Z"
+                    }
+                  ]
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Users"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      },
+       "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Register users",
+        "parameters": [{
+          "name": "users",
+          "in": "body",
+          "schema": {
+            "$ref": "#/definitions/Users"
+          }
+        }],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "summary": "Add New Users",
+            "description": "User is created",
+            "examples": {
+              "application/json": {
+                "FavoriteMovies": [],
+                "_id": "5f93efb21117cb00176a9339",
+                "Username": "Neyoo",
+                "Password": "$2b$10$xni4XHwqlSuEMQhmVWuJf.NPsv8iLdbBAP5oZ.lM7vQrZvZ5BQm.G",
+                "Email": "neyo@gmail.com",
+                "Birthday": "2020-10-01T00:00:00.000Z",
+                "__v": 0
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Location"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "examples": {
+              "application/json": {
+                "message": "Invalid population"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Location"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "examples": {
+              "application/json": {
+                "message": "Parent with that id does not exist"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Location"
+            }
+          }
+        }
+      }
+    },
+    "/users/{:username}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "security": {
+          "BearerAuth": {
+          "type": "http",
+          "scheme": "bearer"
+          }
+        },
+        "summary": "Get user by username",
+        "description": "get user",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "username",
+          "in": "path",
+          "description": "username of user",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "FavoriteMovies": [],
+                "_id": "5f93efb21117cb00176a9339",
+                "Username": "Neyoo",
+                "Password": "$2b$10$xni4XHwqlSuEMQhmVWuJf.NPsv8iLdbBAP5oZ.lM7vQrZvZ5BQm.G",
+                "Email": "neyo@gmail.com",
+                "Birthday": "2020-10-01T00:00:00.000Z"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found",
+            "examples": {
+              "application/json": {
+                "message": "Users not found"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Locations"
+        ],
+        "security": {
+          "BearerAuth": {
+          "type": "http",
+          "scheme": "bearer"
+          }
+        },
+        "summary": "Update location by id",
+        "description": "update location",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [{
+          "name": "username",
+          "in": "path",
+          "description": "username of user",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "password",
+          "in": "formData",
+          "description": "password of user",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "email",
+          "in": "formData",
+          "description": "email of user",
+          "required": false,
+          "type": "string"
+        }, {
+         "name": "birthday",
+         "in": "formData",
+         "description": "users birthday",
+         "required": false,
+         "type": "string"
+       }],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "message": "User successfully updated"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found",
+            "examples": {
+              "application/json": {
+                "message": "User not found"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "security": {
+          "BearerAuth": {
+          "type": "http",
+          "scheme": "bearer"
+          }
+        },
+        "summary": "Delete User by username",
+        "description": "delete user",
+        "parameters": [{
+          "name": "username",
+          "in": "path",
+          "description": "username for deleting",
+          "required": true,
+          "type": "string"
+        }],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "message": "User deleted successfully"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "examples": {
+              "application/json": {
+                "message": "Invalid username"
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "examples": {
+              "application/json": {
+                "message": "User not found"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "required": [
+        "Username",
+        "Password",
+        "Email",
+        "Birthday"
+      ],
+      "properties": {
+        "Username": {
+          "type": "string",
+          "examples": "Kelvin"
+        },
+        "Password": {
+          "type": "string",
+          "example": "password"
+        },
+        "id": {
+          "type": "string",
+          "examples": "5f562e626ad1d9daebb0128f"
+        },
+        "Email": {
+          "type": "string",
+          "examples": "kelvin@gmail.com"
+        },
+         "Birthday": {
+          "type": "string",
+          "examples": "28th Jan"
+        },
+        "FavouriteMovies": {
+        "type": "array",
+        "examples": []
+        }
+      }
+    }
+  }
+}
